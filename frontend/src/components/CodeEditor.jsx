@@ -3,17 +3,16 @@ import axios from 'axios';
 
 function CodeEditor({ codeblockId }) {
   const [code, setCode] = useState('');
-  const [solution, setSolution] = useState('');
+  const [solutionCode, setSolutionCode] = useState('');
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/codeblock_by_id/${codeblockId}`)
       .then((res) => {
-        setCode(res.data.initial_code || '');
-        setSolution(res.data.solution || '');
+        setCode(res.data.initial_template || '');
+        setSolutionCode(res.data.solution_code || '');
       });
   }, [codeblockId]);
-
-  const isCorrect = code.trim() === solution.trim();
+  const isCorrect = code.trim() === solutionCode.trim();
 
   return (
     <div>
@@ -24,7 +23,7 @@ function CodeEditor({ codeblockId }) {
         cols={60}
         style={{ fontFamily: 'monospace', fontSize: '1rem' }}
       />
-      {isCorrect && <div style={{ fontSize: '3rem' }}>😊</div>}
+      {isCorrect && <div style={{ fontSize: '3rem', marginTop: '1rem' }}>😊</div>}
     </div>
   );
 }

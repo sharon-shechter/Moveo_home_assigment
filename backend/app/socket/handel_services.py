@@ -3,8 +3,17 @@ room_participants = {}
 async def handle_join(sio, sid, data):
     room = data["room"]
     await sio.enter_room(sid, room)
+
     room_participants.setdefault(room, []).append(sid)
-    await sio.emit("user_count", {"count": len(room_participants[room])}, room=room)
+
+    # The first person is the mentor
+    role = "mentor" if len(room_participants[room]) == 1 else "student"
+
+    await sio.emit("user_count", {
+        "count": len(room_participants[room]),
+        "sid": sid,
+        "role": role
+    }, to=sid)  
 
 async def handle_leave(sio, sid, data):
     room = data["room"]

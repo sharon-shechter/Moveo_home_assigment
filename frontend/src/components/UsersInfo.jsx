@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-function UserCount({ codeblockId = 'codeblock-1' }) {
+function UsersInfo({ codeblockId = 'codeblock-1' }) {
   const [userCount, setUserCount] = useState(0);
+  const [role, setRole] = useState('');
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ function UserCount({ codeblockId = 'codeblock-1' }) {
 
     socketRef.current.on('user_count', (data) => {
       setUserCount(data.count);
+      setRole(data.role); // 👈 role comes from server!
     });
 
     return () => {
@@ -23,13 +25,13 @@ function UserCount({ codeblockId = 'codeblock-1' }) {
     };
   }, [codeblockId]);
 
-  
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Code Block: {codeblockId}</h2>
       <p>👥 Students in room: {userCount}</p>
+      {role && <p>🧑‍🏫 You are: <strong>{role}</strong></p>}
     </div>
   );
 }
 
-export default UserCount;
+export default UsersInfo;
