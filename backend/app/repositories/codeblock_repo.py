@@ -10,6 +10,10 @@ def get_codeblock_by_id(db: Session, codeblock_id: int):
     return db.query(CodeBlock).filter(CodeBlock.id == codeblock_id).first()
 
 def create_codeblock(db: Session, codeblock_data: CodeBlockCreate):
+    existing = db.query(CodeBlock).filter(CodeBlock.title == codeblock_data.title).first()
+    if existing:
+        raise ValueError("A code block with this title already exists.")
+
     db_codeblock = CodeBlock(
         title=codeblock_data.title,
         initial_template=codeblock_data.initial_template,

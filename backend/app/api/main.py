@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database.tomdb_file import get_db
+from app.database.codeblock_db import get_db
 from app.schemas.codebloc_schema import CodeBlockCreate, CodeBlockResponse
 from app.repositories.codeblock_repo import (
     get_all_codeblocks,
@@ -18,13 +18,16 @@ def read_root():
 def read_codeblocks(db: Session = Depends(get_db)):
     return get_all_codeblocks(db)
 
-@app.get("/codeblocks/{codeblock_id}", response_model=CodeBlockResponse)
+@app.get("/codeblock_by_id/{codeblock_id}", response_model=CodeBlockResponse)
 def read_codeblock(codeblock_id: int, db: Session = Depends(get_db)):
     cb = get_codeblock_by_id(db, codeblock_id)
     if cb is None:
         raise HTTPException(status_code=404, detail="Code block not found")
     return cb
 
-@app.post("/codeblocks", response_model=CodeBlockResponse)
+@app.post("/create_codeblock", response_model=CodeBlockResponse)
 def create_new_codeblock(codeblock: CodeBlockCreate, db: Session = Depends(get_db)):
-    return create_codeblock(db, codeblock)
+    try:
+        return create_codeblock(db, codeblock)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
