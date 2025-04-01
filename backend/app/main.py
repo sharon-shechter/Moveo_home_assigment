@@ -10,7 +10,6 @@ app = FastAPI()
 def root():
     return {"message": "Server is up and running"}
 
-# ✅ Mount API on /api instead of /
 app.mount("/api", api_app)
 
 app.add_middleware(
@@ -21,5 +20,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ This will work correctly now
 sio = init_socketio(app)

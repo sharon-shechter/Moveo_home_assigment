@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-function CodeBlockPage({ codeblockId = 'codeblock-1' }) {
+function UserCount({ codeblockId = 'codeblock-1' }) {
   const [userCount, setUserCount] = useState(0);
   const socketRef = useRef(null);
 
@@ -32,4 +32,4 @@ function CodeBlockPage({ codeblockId = 'codeblock-1' }) {
   );
 }
 
-export default CodeBlockPage;
+export default UserCount;
