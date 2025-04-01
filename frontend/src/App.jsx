@@ -1,8 +1,13 @@
-import CodeBlockPage from './pages/CodeBlockPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/home';
 
 function App() {
   return (
-    <CodeBlockPage codeblockId="codeblock-1" />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
