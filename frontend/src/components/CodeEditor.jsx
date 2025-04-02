@@ -4,6 +4,8 @@ import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript'; 
 import 'prismjs/themes/prism.css';
+import '../styles/codeEditor.css';
+
 
 function CodeEditor({ codeblockId, role, socketRef }) {
   const [code, setCode] = useState('');
@@ -36,7 +38,7 @@ function CodeEditor({ codeblockId, role, socketRef }) {
   const isCorrect = code.trim() === solutionCode.trim();
 
   return (
-    <div>
+    <div className="code-editor-container">
       <Editor
         value={code}
         onValueChange={(newCode) => {
@@ -48,20 +50,15 @@ function CodeEditor({ codeblockId, role, socketRef }) {
             });
           }
         }}
-        highlight={(code) => Prism.highlight(code, Prism.languages.javascript, 'javascript')}
-        padding={16}
-        style={{
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 14,
-          backgroundColor: isReadOnly ? '#f0f0f0' : 'white',
-          cursor: isReadOnly ? 'not-allowed' : 'text',
-          border: '1px solid #ccc',
-          borderRadius: '5px',
-        }}
+        highlight={(code) =>
+          Prism.highlight(code, Prism.languages.javascript, 'javascript')
+        }
+        padding={0} 
+        className={`code-editor ${isReadOnly ? 'read-only' : ''}`}
         readOnly={isReadOnly}
       />
       {isCorrect && role === 'student' && (
-        <div style={{ fontSize: '2rem', marginTop: '1rem' }}>✅ Well done!</div>
+        <div className="code-editor-result">✅ Well done!</div>
       )}
     </div>
   );

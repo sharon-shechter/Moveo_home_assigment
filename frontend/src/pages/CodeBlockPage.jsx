@@ -3,6 +3,7 @@ import CodeEditor from "../components/CodeEditor";
 import UsersInfo from "../components/UsersInfo";
 import { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
+import '../styles/codeBlockPage.css'; 
 
 function CodeBlockPage() {
   const { codeblockId } = useParams();
@@ -37,7 +38,7 @@ function CodeBlockPage() {
   }, [codeblockId, navigate]);
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="codeblock-page">
       <UsersInfo codeblockId={codeblockId} userCount={userCount} role={role} />
       <CodeEditor codeblockId={codeblockId} socketRef={socketRef} role={role} />
     </div>

@@ -1,8 +1,9 @@
+import '../styles/usersInfo.css';
+
 function UsersInfo({ codeblockId, userCount, role }) {
-  console.log("👥 userCount:", userCount, "role:", role);
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="users-info">
       <h2>Code Block: {codeblockId}</h2>
       <p>👥 Students in room: {userCount}</p>
       {role && <p>🧑‍🏫 You are: <strong>{role}</strong></p>}
