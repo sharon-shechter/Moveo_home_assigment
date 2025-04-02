@@ -1,29 +1,36 @@
-room_participants = {}
+rooms = {}  # Example structure: {room_id: {'mentor_sid': sid, 'students': [sids]}}
 
 async def handle_join(sio, sid, data):
-    room = data["room"]
+    room = data['room']
     await sio.enter_room(sid, room)
 
-    room_participants.setdefault(room, []).append(sid)
+    if room not in rooms:
+        rooms[room] = {'mentor_sid': sid, 'students': []}
+        role = 'mentor'
+    else:
+        rooms[room]['students'].append(sid)
+        role = 'student'
 
-    # The first person is the mentor
-    role = "mentor" if len(room_participants[room]) == 1 else "student"
-
-    await sio.emit("user_count", {
-        "count": len(room_participants[room]),
-        "sid": sid,
-        "role": role
-    }, to=sid)  
+    await sio.emit('user_count', {
+        'count': len(rooms[room]['students']) + 1,
+        'role': role
+    }, to=sid)
 
 async def handle_leave(sio, sid, data):
-    room = data["room"]
+    room = data['room']
     await sio.leave_room(sid, room)
-    if room in room_participants and sid in room_participants[room]:
-        room_participants[room].remove(sid)
-        await sio.emit("user_count", {"count": len(room_participants[room])}, room=room)
+    await handle_disconnect(sio, sid)
 
 async def handle_disconnect(sio, sid):
-    for room, participants in room_participants.items():
-        if sid in participants:
-            participants.remove(sid)
-            await sio.emit("user_count", {"count": len(participants)}, room=room)
+    for room, data in list(rooms.items()):  
+        if data.get('mentor_sid') == sid:
+            await sio.emit('mentor_left', room=room)
+            del rooms[room]
+            break
+        elif sid in data['students']:
+            data['students'].remove(sid)
+            await sio.emit('user_count', {
+                'count': len(data['students']) + 1,
+                'role': 'student'
+            }, room=room)
+            break

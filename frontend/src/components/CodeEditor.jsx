@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function CodeEditor({ codeblockId }) {
+function CodeEditor({ codeblockId, socketRef }) {
   const [code, setCode] = useState('');
   const [solutionCode, setSolutionCode] = useState('');
 
@@ -12,6 +12,15 @@ function CodeEditor({ codeblockId }) {
         setSolutionCode(res.data.solution_code || '');
       });
   }, [codeblockId]);
+
+  useEffect(() => {
+    if (socketRef && socketRef.current) {
+      socketRef.current.on('mentor_left', () => {
+        setCode('');  // clear the code
+      });
+    }
+  }, [socketRef]);
+
   const isCorrect = code.trim() === solutionCode.trim();
 
   return (
