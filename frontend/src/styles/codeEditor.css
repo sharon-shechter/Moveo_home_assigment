@@ -1,39 +1,72 @@
 .code-editor-container {
-    margin: 2rem auto;
-    text-align: left;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .code-editor {
-    font-family: 'Fira Code', 'Fira Mono', monospace;
-    font-size: 15px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 16px;
-    min-height: 300px;
-    width: 100%;
-    max-width: 800px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: all 0.2s ease-in-out;
-    white-space: pre-wrap;
-    word-break: break-word;
-    overflow-x: auto;
-  }
-  
-  .code-editor.read-only {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-    border-color: #aaa;
-  }
-  
-  .code-editor-result {
-    font-size: 1.8rem;
-    margin-top: 1.5rem;
-    color: #28a745;
-    text-align: center;
-    font-weight: bold;
-  }
-  
+  margin: 2rem auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.code-editor {
+  font-family: 'Fira Code', 'Fira Mono', monospace;
+  font-size: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 16px;
+  min-height: 300px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.code-editor.read-only {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  border-color: #aaa;
+}
+
+.code-editor-result {
+  font-size: 1.8rem;
+  margin-top: 1.5rem;
+  color: #28a745;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 💡 Hint Button */
+.hint-button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.hint-button:hover {
+  background-color: #005fa3;
+}
+
+.hint-box {
+  margin-top: 1.5rem;
+  max-width: 800px;
+  width: 100%;
+  background-color: #fffbe6;
+  border: 1px solid #ffe58f;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  line-height: 1.4;
+}

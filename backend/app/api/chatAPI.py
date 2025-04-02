@@ -26,5 +26,4 @@ def get_hint_from_openai(student_code: str, solution_code: str) -> str:
         return response['choices'][0]['message']['content'].strip()
 
     except Exception as e:
-        print(" Error contacting OpenAI:", e)
         raise 'failed to get hint from openai {e}'
