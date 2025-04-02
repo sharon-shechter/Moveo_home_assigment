@@ -21,9 +21,10 @@ function CodeBlockPage() {
     socketRef.current.emit('join_room', { room: codeblockId });
 
     socketRef.current.on('user_count', (data) => {
-      console.log("👥 user_count event:", data);
       setUserCount(data.count);
-      setRole(data.role);
+      if (data.role) {
+        setRole(data.role);
+      }
     });
 
     socketRef.current.on('mentor_left', () => {

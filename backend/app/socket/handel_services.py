@@ -1,6 +1,7 @@
 rooms = {} 
 
 async def handle_join(sio, sid, data):
+   
     room = data['room']
     await sio.enter_room(sid, room)
 
@@ -31,9 +32,10 @@ async def handle_disconnect(sio, sid):
             data['students'].remove(sid)
             await sio.emit('user_count', {
                 'count': len(data['students']) + 1,
-                'role': 'student'
             }, room=room)
             break
+
+        
 async def handle_code_update(sio, sid, data):
     room = data['room']
     code = data['code']
