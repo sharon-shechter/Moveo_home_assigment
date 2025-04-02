@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function CodeEditor({ codeblockId, socketRef }) {
+function CodeEditor({ codeblockId, role }) {
   const [code, setCode] = useState('');
   const [solutionCode, setSolutionCode] = useState('');
 
@@ -13,15 +13,8 @@ function CodeEditor({ codeblockId, socketRef }) {
       });
   }, [codeblockId]);
 
-  useEffect(() => {
-    if (socketRef && socketRef.current) {
-      socketRef.current.on('mentor_left', () => {
-        setCode('');  // clear the code
-      });
-    }
-  }, [socketRef]);
-
   const isCorrect = code.trim() === solutionCode.trim();
+  const isReadOnly = role === 'mentor';
 
   return (
     <div>
@@ -30,11 +23,20 @@ function CodeEditor({ codeblockId, socketRef }) {
         onChange={(e) => setCode(e.target.value)}
         rows={10}
         cols={60}
-        style={{ fontFamily: 'monospace', fontSize: '1rem' }}
+        readOnly={isReadOnly}
+        style={{
+          fontFamily: 'monospace',
+          fontSize: '1rem',
+          backgroundColor: isReadOnly ? '#f0f0f0' : 'white',
+          cursor: isReadOnly ? 'not-allowed' : 'text',
+        }}
       />
-      {isCorrect && <div style={{ fontSize: '3rem', marginTop: '1rem' }}>😊</div>}
+      {isCorrect && role === 'student' && (
+        <div style={{ fontSize: '3rem', marginTop: '1rem' }}>Well done! 😊</div>
+      )}
     </div>
   );
 }
+
 
 export default CodeEditor;

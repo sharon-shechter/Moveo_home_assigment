@@ -39,8 +39,8 @@ function CodeBlockPage() {
   return (
     <div style={{ padding: '2rem' }}>
       <UsersInfo codeblockId={codeblockId} userCount={userCount} role={role} />
-      <CodeEditor codeblockId={codeblockId} socketRef={socketRef} />
-    </div>
+      <CodeEditor codeblockId={codeblockId} socketRef={socketRef} role={role} />
+      </div>
   );
 }
 

@@ -1,4 +1,4 @@
-rooms = {}  # Example structure: {room_id: {'mentor_sid': sid, 'students': [sids]}}
+rooms = {} 
 
 async def handle_join(sio, sid, data):
     room = data['room']
