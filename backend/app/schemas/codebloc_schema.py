@@ -1,12 +1,12 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class CodeBlockBase(BaseModel):
     title: str
     initial_template: str
     solution_code: str
 
-class CodeBlockCreate(CodeBlockBase):
-    pass
+CodeBlockCreate = CodeBlockBase
 
 class CodeBlockResponse(CodeBlockBase):
     id: int
