@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-socketio
+uvicorn[standard]
+fastapi-socketio
+openai==0.28.1
+sqlalchemy
+pydantic
+python-dotenv
+

@@ -4,6 +4,8 @@ import UsersInfo from "../components/UsersInfo";
 import { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import '../styles/codeBlockPage.css'; 
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function CodeBlockPage() {
   const { codeblockId } = useParams();
@@ -13,7 +15,7 @@ function CodeBlockPage() {
   const [role, setRole] = useState('');
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:8000", {
+    socketRef.current = io(`${API_URL}`, {
       path: "/socket.io",
       transports: ["websocket"],
     });

@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/home.css'; // Optional styling
+import '../styles/home.css'; 
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function Home() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [codeblocks, setCodeblocks] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const navigate = useNavigate();
 
   // Fetch codeblock list from the server
   useEffect(() => {
-    axios.get('http://localhost:8000/api/codeblocks')
+    axios.get(`${API_URL}/api/codeblocks`)
       .then((res) => setCodeblocks(res.data))
       .catch((err) => console.error('Error fetching codeblocks', err));
   }, []);
@@ -23,7 +26,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>👨‍💻 Welcome to Tom's Coding App</h1>
+      <h1>👨‍💻 Welcome to Tom's Coding Website </h1>
       <p>Select a code block to start coding:</p>
 
       <select
@@ -40,7 +43,7 @@ function Home() {
       </select>
 
       <button onClick={handleNavigate} disabled={!selectedId} className="start-button">
-        🚀 Go to Codeblock
+        Go to Codeblock! 
       </button>
     </div>
   );

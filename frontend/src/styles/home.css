@@ -1,35 +1,70 @@
+/* General page container */
 .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    gap: 1rem;
-  }
-  
-  .home-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .home-description {
-    font-size: 1.1rem;
-    color: #444;
-  }
-  
-  .start-button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .start-button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Title */
+.home-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+/* Description */
+.home-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+/* Dropdown */
+.dropdown {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  min-width: 250px;
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Button */
+.start-button {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.start-button:hover {
+  background: linear-gradient(90deg, #0056b3, #009ec3);
+  transform: translateY(-2px);
+}
+
+.start-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}

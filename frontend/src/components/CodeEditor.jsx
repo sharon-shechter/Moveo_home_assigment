@@ -5,6 +5,8 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism.css';
 import '../styles/codeEditor.css';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function CodeEditor({ codeblockId, role, socketRef }) {
   const [code, setCode] = useState('');
@@ -12,7 +14,7 @@ function CodeEditor({ codeblockId, role, socketRef }) {
   const [hint, setHint] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/codeblock_by_id/${codeblockId}`)
+    axios.get(`${API_URL}/api/codeblock_by_id/${codeblockId}`)
       .then((res) => {
         setCode(res.data.initial_template || '');
         setSolutionCode(res.data.solution_code || '');
@@ -38,7 +40,7 @@ function CodeEditor({ codeblockId, role, socketRef }) {
 
   const getHintFromAI = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/get_hint', {
+      const response = await axios.post(`${API_URL}/api/get_hint`, {
         student_code: code,
         solution_code: solutionCode
       });

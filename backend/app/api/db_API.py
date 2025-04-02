@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi import Query
 from sqlalchemy.orm import Session
 from app.database.codeblock_db import get_db
 from app.schemas.codebloc_schema import CodeBlockCreate, CodeBlockResponse
