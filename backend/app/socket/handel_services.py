@@ -34,3 +34,7 @@ async def handle_disconnect(sio, sid):
                 'role': 'student'
             }, room=room)
             break
+async def handle_code_update(sio, sid, data):
+    room = data['room']
+    code = data['code']
+    await sio.emit('code_update', {'code': code}, room=room, skip_sid=sid)
