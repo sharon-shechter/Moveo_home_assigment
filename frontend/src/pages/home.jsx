@@ -6,7 +6,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 
 function Home() {
-  const API_URL = import.meta.env.VITE_API_URL;
   const [codeblocks, setCodeblocks] = useState([]);
   const [selectedId, setSelectedId] = useState('');
   const navigate = useNavigate();
